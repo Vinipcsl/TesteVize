@@ -1,0 +1,24 @@
+Quais princípios SOLID foram usados? Qual foi o motivo da escolha deles?
+
+Foi utilizado o Principio de Responsabilidade Unica, pois para a api é melhor que cada classe e cada método tenha apenas a sua função, além de me permitir fazer uma manutenção mais fácil caso seja necessário.
+
+Outro utilizado é o conceito Open Close, pois eu vou permitir que novas implementações de repositório possam ser realizadas sem modificar a interface.
+
+Para instanciar o banco primeiro você pode ir em appsettings.cs para modificar o nome do banco e a senha para acesso.
+
+Ir para o console do gerenciador de pacotes para utilizar os seguintes comandos:
+
+1- Add-Migration InitialDb -Context ProdutosDBContext
+
+2- Update-Database -Context ProdutosDBContext
+
+Assim será criado o banco e irá subir as tabelas
+
+Um melhoria que eu poderia utilizar no meu código seria nas consultas do banco, utilizar as consultas sql direto na classe de ProdutoRepositório exemplo:
+
+ public async Task<List<ProdutoModel>> BuscarTodosProdutos()
+    {
+        var sql = "SELECT * FROM Produtos";
+        return (await _dbConnection.QueryAsync<ProdutoModel>(sql)).AsList();
+    }
+
